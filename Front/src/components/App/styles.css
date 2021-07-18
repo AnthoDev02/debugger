@@ -1,9 +1,120 @@
-.app {
-  width: 500px;
-  margin: 1em auto;
+.main {
+  height: 100vh;
+  background-color: #F7F7F7;
+}
+
+.search {
+  margin-left: 15rem;
+}
+
+header {
+  text-align: center;
+  color: #6B7DEA;
+  background-color: #ffffff;
+  font-size: 16;
+  font-weight: bold;
+  font-family: Source Sans Pro;
+  height: 3rem;
+  padding: 1rem;
+  box-shadow: 1px 2px 4px #00000015;
+}
+
+.title {
+  position: fixed;
+  background: radial-gradient(#3C52C9, #6B7DEA);
+  top: 0;
+  height: 100%;
+  width: 15rem;
+}
+
+h1 {
+  font-size: 19px;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-family: Source Sans Pro;
+  text-align: justify;
+  margin: 1rem .5rem 0 5rem;
+}
+
+h2 {
+  padding-left: 1rem;
+  padding-top: 0.6rem;
+  font-weight: bold;
+  color: RGBA(0, 0, 0, 0.5);
+}
+
+form {
+  margin: 2rem 3rem 0 3rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 3px 3px #00000015;
+}
+
+label {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.input {
+  width: 456px;
+  height: 46px;
+  border-radius: 5px;
+}
+
+button {
+  width: 12rem;
+  height: 51px;
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #FFFFFF;
+  background-color: #3D61FF;
+  font-family: Source Sans Pro;
+  border-radius: 4px;
+  margin-top: 1rem;
+  box-shadow: 0px 3px 7px #3D61FF;
+}
+
+table {
+  margin: 2rem 3rem 0 3rem;
+  width: 80%;
+}
+
+td {
+  background-color: #fff;
+}
+
+.rowResult {
+  height: 58px;
   text-align: center;
 }
 
-.app img {
-  max-width: 150px;
+th {
+  color: RGBA(0, 0, 0, 0.5);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Source Sans Pro;
+  height: 38px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.noCentered {
+  text-align: left;
+}
+
+.searchHeader {
+  display: flex;
+  text-align: center;
+  margin: 2rem 3rem 0 3rem;
+}
+
+.square {
+  height: 30px;
+  width: 30px;
+  background: #6BC5BC;
+  border-radius: 3px;
 }

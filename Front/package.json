@@ -1,6 +1,5 @@
 {
   "name": "debugger",
-
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
@@ -55,6 +54,7 @@
     "webpack-merge": "^5.0.6"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
