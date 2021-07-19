@@ -5,6 +5,7 @@
 
 .search {
   margin-left: 15rem;
+  height: 100%;
 }
 
 header {
@@ -65,6 +66,7 @@ label {
 button {
   width: 12rem;
   height: 51px;
+  width: 15rem;
   margin-left: 20px;
   font-weight: 600;
   font-size: 18px;
@@ -77,12 +79,13 @@ button {
 }
 
 table {
-  margin: 2rem 3rem 0 3rem;
-  width: 80%;
+  margin: 2rem 3rem 0;
+  width: 92%;
 }
 
 td {
   background-color: #fff;
+  padding: 2rem 0;
 }
 
 .rowResult {
@@ -117,4 +120,18 @@ th {
   width: 30px;
   background: #6BC5BC;
   border-radius: 3px;
+  margin-top: 2.3rem;
+}
+
+.ui.medium.active.loader {
+  margin-top: 5rem;
+}
+
+.CFStatus {
+  background-color: red;
+  border-radius: 50px;
+  padding: .5rem;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 12px;
 }
