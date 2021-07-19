@@ -1,4 +1,4 @@
-const { default: axios } = require('axios');
+const axios = require('axios');
 
 const urlController = {
     async getHeadersByUrl(request, response, next) {
@@ -20,7 +20,7 @@ const urlController = {
                 statusCode: callToFindHeaders.status,
                 fstrzFlags: callToFindHeaders.headers['x-fstrz'],
                 cloudfrontStatus: callToFindHeaders.headers['x-cache']?.split(' ')[0].toUpperCase(),
-                cloudfrontPOP: callToFindHeaders.headers['x-amz-cf-pop'].substring(0, 3)
+                cloudfrontPOP: callToFindHeaders.headers['x-amz-cf-pop']?.substring(0, 3)
             }
             console.log('result:',result);
             response.json(result);

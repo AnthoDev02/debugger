@@ -1,24 +1,19 @@
 require('dotenv').config();
 const express = require('express');
-//à revoir
-// const corsMiddleware = require('./Back/cors');
 const cors = require('cors')
-
 
 const router = require('./Back/router');
 const app = express();
 
-
-app.use(cors("*"));
+const corsOptions = {
+   origin: 'http://localhost:8080',
+   'allowedHeaders': ['Content-Type'],
+   'methods': 'GET',
+ }
+ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
-
-
-
-
 
 app.use(router);
 
