@@ -1,32 +1,38 @@
 const axios = require('axios');
+const codeFlag = require('../../Front/src/Data/code.json');
 
 const urlController = {
-    async getHeadersByUrl(request, response, next) {
+    async getHeadersByUrl(request, response) {
         try {
             const url = request.body.url.search;
-
-            const callToFindHeaders = await axios.get(url);
 
             if (!url) {
 
                 response.locals.notFound ="url not found"
-                next()
                 return;
             }
-            delete callToFindHeaders.data;
 
+            // récupération des headers et gestion du code du paramètre cloudfrontPOP
+            const callToFindHeaders = await axios.get(url);
+            const codeCloudFrontPop = callToFindHeaders.headers['x-amz-cf-pop']?.substring(0, 3)
+
+            // récupération de l'objet Json
+            const callToFindAirport = await axios.get('https://www.cloudping.cloud/cloudfront-edge-locations.json');
+            const jsonResult = callToFindAirport.data.nodes;
+
+            // objet renvoyé au front
             const result = {
                 plugged: callToFindHeaders.headers.server === 'fasterize' ? true : false,
                 statusCode: callToFindHeaders.status,
-                fstrzFlags: callToFindHeaders.headers['x-fstrz'],
+                fstrzFlags: codeFlag[callToFindHeaders.headers['x-fstrz']],
                 cloudfrontStatus: callToFindHeaders.headers['x-cache']?.split(' ')[0].toUpperCase(),
-                cloudfrontPOP: callToFindHeaders.headers['x-amz-cf-pop']?.substring(0, 3)
+                cloudfrontPOP: jsonResult[codeCloudFrontPop]?.country
             }
-            console.log('result:',result);
+            
             response.json(result);
 
         } catch (error) {
-            next(error);
+            console.error(error);
         }
     }
 };
