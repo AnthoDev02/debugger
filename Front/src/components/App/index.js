@@ -1,41 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Icon } from 'semantic-ui-react';
 import Loader from '../Loader';
 
 import './styles.css';
 
-let number = 1;
-
 const Debugger = () => {
   const [search, setSearch] = useState('');
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [number, setNumber] = useState(0);
+  const [errorUrl, setErrorUrl] = useState(false);
+
+  const url = new RegExp(/https?:\/\/(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z]{2,3}\b([a-zA-Z]*)$/);
 
   const date = new Date();
   const currentDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  const arrayToLocalStorage = [];
-  const addLocalStorage = (res) => {
-    const response = res;
-    arrayToLocalStorage.push(response);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    number += 1;
-    if (search === '') return;
-    setIsLoading(true);
-    const config = {
-      url: { search },
-    };
-    axios.post('http://localhost:9852', config)
-      .then((response) => {
-        addLocalStorage(response.data);
-        setResult(response.data);
-        const key = `${`apiResponse${number}`}`;
-        localStorage.setItem(key, JSON.stringify(result));
-        setIsLoading(false);
-      });
+    if (!url.test(search) || search === '') {
+      setErrorUrl(true);
+    }
+    if (url.test(search)) {
+      setIsLoading(true);
+      const config = {
+        url: { search },
+      };
+      axios.post('http://localhost:9852', config)
+        .then((response) => {
+          setResult(response.data);
+          const key = `${`apiResponse${number}`}`;
+          localStorage.setItem(key, JSON.stringify(response.data));
+          setIsLoading(false);
+        });
+    }
+    setNumber(number + 1);
   };
 
   return (
@@ -50,14 +50,17 @@ const Debugger = () => {
           <h2>HEADER DEBUGGER</h2>
         </div>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={
+            handleSubmit
+          }
         >
           <label>Url to check</label>
           <input
             className="input"
             onClick={() => {
-              arrayToLocalStorage.push(result);
               setResult('');
+              setSearch('');
+              setErrorUrl(false);
             }}
             onChange={(event) => {
               setSearch(event.target.value);
@@ -71,6 +74,7 @@ const Debugger = () => {
           </button>
 
         </form>
+        {errorUrl && <div className="errorlabel">L'url n'est pas valide</div>}
         <div className="searchHeader">
           <div className="square" />
           <h2>HISTORY</h2>
@@ -95,9 +99,9 @@ const Debugger = () => {
                       <td className="centered">{currentDate}</td>
                       <td className="noCentered">{search}</td>
                       <td className="centered">{result.statusCode === 200 ? <Icon color="green" name="cloud" /> : <Icon color="red" name="cloud" />}</td>
-                      <td className="noCentered">{result.fstrzFlags}</td>
-                      <td className="centered"><span className="CFStatus">{result.cloudfrontStatus}</span></td>
-                      <td className="noCentered">{result.cloudfrontPOP}</td>
+                      <td className="noCentered">{result.fstrzFlags ? result.fstrzFlags : 'N.R.'}</td>
+                      <td className="centered">{result.cloudfrontStatus ? <span className="CFStatus">{result.cloudfrontStatus}</span> : 'N.R.' }</td>
+                      <td className="noCentered">{result.cloudfrontPOP ? result.cloudfrontPOP : 'N.R.'}</td>
                     </tr>
                   )
                   : <tr />}
@@ -105,6 +109,7 @@ const Debugger = () => {
             </table>
           ) : ''}
         {isLoading ? <Loader /> : ''}
+        {result !== '' && <div className="arrayInfo">"N.R. = Non Renseigné"</div>}
       </div>
     </div>
   );

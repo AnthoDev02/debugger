@@ -135,3 +135,12 @@ th {
   font-weight: 400;
   font-size: 12px;
 }
+
+.arrayInfo {
+  margin: 2rem 3rem 0;
+}
+
+.errorlabel {
+  margin: 2rem 3rem 0;
+  font-size: 15px;
+}

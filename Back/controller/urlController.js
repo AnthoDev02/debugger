@@ -6,12 +6,6 @@ const urlController = {
         try {
             const url = request.body.url.search;
 
-            if (!url) {
-
-                response.locals.notFound ="url not found"
-                return;
-            }
-
             // récupération des headers et gestion du code du paramètre cloudfrontPOP
             const callToFindHeaders = await axios.get(url);
             const codeCloudFrontPop = callToFindHeaders.headers['x-amz-cf-pop']?.substring(0, 3)
