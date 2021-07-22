@@ -32,7 +32,6 @@ const urlController = {
                     isError: error.isAxiosError
                 })
             }
-            
         }
     }
 };
