@@ -28,7 +28,7 @@ const urlController = {
         } catch (error) {
             if (error.isAxiosError) {
                 response.json({
-                    errorMessage: `L'url: '${error.hostname}' n'existe pas`,
+                    errorMessage: `L'url: '${error.config.url}' n'existe pas`,
                     isError: error.isAxiosError
                 })
             }
