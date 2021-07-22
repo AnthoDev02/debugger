@@ -115,7 +115,7 @@ const Debugger = () => {
                       <td className="centered">{currentDate}</td>
                       <td className="noCentered">{search}</td>
                       <td className="centered">{result.statusCode === 200 ? <Icon color="green" name="cloud" /> : <Icon color="red" name="cloud" />}</td>
-                      <td className="noCentered">{result.fstrzFlags ? result.fstrzFlags : 'N.R.'}</td>
+                      <td className="noCentered">{result.fstrzFlags ? <span className="flag">{result.fstrzFlags}</span> : 'N.R.'}</td>
                       <td className="centered">{result.cloudfrontStatus ? <span className="CFStatus">{result.cloudfrontStatus}</span> : 'N.R.' }</td>
                       <td className="noCentered">{result.cloudfrontPOP ? result.cloudfrontPOP : 'N.R.'}</td>
                     </tr>
