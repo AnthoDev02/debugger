@@ -53,11 +53,9 @@ const Debugger = () => {
 
   return (
     <div className="main">
-      <div className="title">
-        <h1>Fasterize</h1>
-      </div>
+      <div className="title" />
       <div className="search">
-        <header>FASTERIZE DEBUGGER</header>
+        <header>DEBUGGER</header>
         <div className="searchHeader">
           <div className="square" />
           <h2>HEADER DEBUGGER</h2>
